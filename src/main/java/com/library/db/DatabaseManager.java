@@ -6,16 +6,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
-
-    // The database file will be created in your project root
+    // SQLite connection URL (file-based database)
     private static final String URL = "jdbc:sqlite:library.db";
 
-    // Returns a live connection to the database
+    // Get a connection to the database
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
 
-    // Creates all tables if they don't exist yet
+    // Creates all tables
     public static void initializeDatabase() {
         String createBooks = """
                 CREATE TABLE IF NOT EXISTS books (
@@ -47,7 +46,7 @@ public class DatabaseManager {
                 );
                 """;
 
-        // Try-with-resources automatically closes the connection when done
+        // Execute the SQL statements to create tables
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
 
