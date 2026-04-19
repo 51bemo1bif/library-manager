@@ -13,4 +13,7 @@
       <module name="library-manager1" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="TypeScriptCompiler">
+    <option name="showSuggestions" value="false" />
+  </component>
 </project>
