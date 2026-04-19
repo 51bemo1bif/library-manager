@@ -1,1 +1,2 @@
 # library-manager
+in this project i will showcase my skills in java and spring boot by creating a library management system. The system will allow users to manage their books, authors, and publishers. Users will be able to add, update, delete, and view their books, authors, and publishers. The system will also allow users to search for books by title, author, and publisher. The system will be built using Java and Spring Boot, and it will use a MySQL database to store the data.
