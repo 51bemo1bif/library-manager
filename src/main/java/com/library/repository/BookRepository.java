@@ -1,8 +1,10 @@
 package com.library.repository;
 import com.library.db.DatabaseManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.library.model.Book;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BookRepository {
@@ -25,4 +27,39 @@ public class BookRepository {
         }
 
     }
+    public List<Book> getAllBooks() {
+        // Code to retrieve all books from the database
+        List<Book> books = new ArrayList<>();
+        String sql = "SELECT id, title, author, year, available FROM books";
+
+        try(Connection connection = DatabaseManager.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);){
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                int year = rs.getInt("year");
+                boolean available = rs.getInt("available") == 1;
+                books.add(new Book(id, title, author, year, available));
+
+
+        }
+
+        }
+        catch (SQLException e) {
+            System.out.println("Error retrieving books: " + e.getMessage());
+
+        }
+        return books;
+
+
+
+
+    }
+
+
+
+
 }
