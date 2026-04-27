@@ -40,6 +40,7 @@ public class DatabaseManager {
                     book_id     INTEGER NOT NULL,
                     member_id   INTEGER NOT NULL,
                     borrowed_on TEXT NOT NULL,
+                    due_date   TEXT ,
                     returned_on TEXT,
                     FOREIGN KEY (book_id)   REFERENCES books(id),
                     FOREIGN KEY (member_id) REFERENCES members(id)

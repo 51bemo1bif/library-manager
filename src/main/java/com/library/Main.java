@@ -6,7 +6,7 @@ import com.library.repository.MemberRepository;
 
 public class Main {
     public static void main(String[] args) {
-        DatabaseManager.initializeDatabase();
+       DatabaseManager.initializeDatabase();
         BookRepository bookRepo = new BookRepository();
         bookRepo.addBook("The Great Gatsby", "F. Scott Fitzgerald", 1925);
         bookRepo.addBook("To Kill a Mockingbird", "Harper Lee", 1960);
