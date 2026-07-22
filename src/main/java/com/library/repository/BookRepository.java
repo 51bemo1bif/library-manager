@@ -58,8 +58,27 @@ public class BookRepository {
 
 
     }
+    public List<Book> getBookById(int id) {
+
+            List<Book> book = new ArrayList<>();
+             String sql = "SELECT * FROM books WHERE id = ?";
+
+            try(Connection connection = DatabaseManager.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);){
+
+            while (rs.next()) {
+                int ids = rs.getInt("id");
+
+
+    }}
+        catch (SQLException e) {
+            System.out.println("Error retrieving books: " + e.getMessage());
+
+        }
+        return book;
 
 
 
-
+    }
 }
