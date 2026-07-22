@@ -81,4 +81,23 @@ public class BookRepository {
 
 
     }
+
+    public void setAvailability(int bookId, boolean available){
+        String sql = "UPDATE books SET available = ? WHERE id = ?";
+        try(Connection connection = DatabaseManager.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setInt(1, available ? 1 : 0);
+            stmt.setInt(2, bookId);
+            stmt.executeUpdate();
+            System.out.println("Book available from : " + available);
+
+        }
+        catch (SQLException e) {
+            System.out.println("Error updasting  book: " + e.getMessage());
+        }
+
+
+    }
+
 }
