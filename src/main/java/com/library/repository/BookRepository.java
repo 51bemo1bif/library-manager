@@ -58,28 +58,31 @@ public class BookRepository {
 
 
     }
-    public List<Book> getBookById(int id) {
+    public Book getBookById(int id) {
+        Book book = null;
+        String sql = "SELECT * FROM books WHERE id = ?";
 
-            List<Book> book = new ArrayList<>();
-             String sql = "SELECT * FROM books WHERE id = ?";
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
-            try(Connection connection = DatabaseManager.getConnection();
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                int ids = rs.getInt("id");
+            if (rs.next()) {
+                book = new Book(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getInt("year"),
+                        rs.getInt("available") == 1
+                );
+            }
 
-
-    }}
-        catch (SQLException e) {
-            System.out.println("Error retrieving books: " + e.getMessage());
-
+        } catch (SQLException e) {
+            System.out.println("Error retrieving book: " + e.getMessage());
         }
+
         return book;
-
-
-
     }
 
     public void setAvailability(int bookId, boolean available){

@@ -3,6 +3,7 @@ package com.library;
 import com.library.db.DatabaseManager;
 import com.library.repository.BookRepository;
 import com.library.repository.MemberRepository;
+import com.library.service.LibraryService;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,5 +21,8 @@ public class Main {
         System.out.println("Library members:");
         memberRepo.getAllMemebers().forEach(System.out::println);
 
+        LibraryService libraryService = new LibraryService();
+        libraryService.borrowBook(1, 1);
+        libraryService.borrowBook(1, 1);
     }
 }
